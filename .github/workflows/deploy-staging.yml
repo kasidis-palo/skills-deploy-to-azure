@@ -4,11 +4,11 @@ on:
   pull_request:
     types: [labeled]
 
+permissions:
+  id-token: write
+
 env:
   IMAGE_REGISTRY_URL: ghcr.io
-  ###############################################
-  ### Replace <username> with GitHub username ###
-  ###############################################
   DOCKER_IMAGE_NAME: kasidis-palo-azure-ttt
   AZURE_WEBAPP_NAME: kasidis-palo-ttt-app
   ###############################################
@@ -26,7 +26,7 @@ jobs:
           node-version: 16
       - name: npm install and build webpack
         run: |
-          npm install
+          npm install --force
           npm run build
       - uses: actions/upload-artifact@v4
         with:
